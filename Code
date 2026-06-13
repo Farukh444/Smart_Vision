@@ -1,0 +1,76 @@
+#define buzzerL_pin 4  
+#define buzzerR_pin A2  
+#define trigPinL 3 // Trigger Pin  
+#define echoPinL 2 // Echo Pin 
+#define trigPinR A1 // Trigger Pin  
+#define echoPinR A0 // Echo Pin 
+long durationL, distanceL; // Duration used to calculate distance  
+long durationR, distanceR; // Duration used to calculate distance 
+void setup() 
+{ 
+Serial.begin(9600);  
+pinMode(trigPinL, OUTPUT);  
+pinMode(echoPinL, INPUT);  
+pinMode(trigPinR, OUTPUT);  
+pinMode(echoPinR, INPUT);  
+pinMode(buzzerL_pin, OUTPUT);  
+pinMode(buzzerR_pin, OUTPUT);  
+delay(500); 
+} 
+void loop() 
+{ 
+//**********************************************************  
+digitalWrite(trigPinL, LOW); 
+delayMicroseconds(2);  
+digitalWrite(trigPinL, HIGH);  
+delayMicroseconds(10);  
+digitalWrite(trigPinL, LOW);  
+durationL = pulseIn(echoPinL, HIGH);  
+distanceL = durationL / 58.2;  
+Serial.print("distanceL"); 
+Serial.println(distanceL); 
+//**********************************************************  
+digitalWrite(trigPinL, LOW); 
+delayMicroseconds(2);  
+digitalWrite(trigPinL, HIGH);  
+delayMicroseconds(10);  
+digitalWrite(trigPinL, LOW);  
+durationL = pulseIn(echoPinL, HIGH);  
+distanceL = durationL / 58.2;  
+Serial.print("distanceL");  
+Serial.println(distanceL); 
+if (distanceL > 50) 
+{ 
+digitalWrite(buzzerL_pin, LOW); 
+} 
+else 
+{ 
+digitalWrite(buzzerL_pin, HIGH);  
+delay(distanceL * 5); 
+digitalWrite(buzzerL_pin,LOW);  
+delay(distandeL);  
+} 
+//**********************************************************  
+digitalWrite(trigPinR, LOW); 
+delayMicroseconds(2);  
+digitalWrite(trigPinR, HIGH);  
+delayMicroseconds(10);  
+digitalWrite(trigPinR, LOW);  
+durationR = pulseIn(echoPinR, HIGH);  
+distanceR = durationR / 58.2;  
+Serial.print("distanceR");  
+Serial.println(distanceR); 
+if (distanceR > 50) 
+{ 
+digitalWrite(buzzerR_pin, LOW); 
+} 
+else 
+{ 
+digitalWrite(buzzerR_pin, 
+HIGH); delay(distanceR * 5);  
+digitalWrite(buzzerR_pin, LOW);  
+delay(distanceR); 
+} 
+delay(50); 
+//************************************************************* 
+}
